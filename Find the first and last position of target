@@ -1,0 +1,42 @@
+class Solution(object):
+    def searchRange(self, nums, target):
+        def ceil1(nums,target):
+            low = 0
+            high = len(nums)-1
+            f=True
+            while(low<=high):
+                mid = (low+high)//2
+                if(nums[mid] == target):
+                    f = False
+                if(nums[mid]>=target):
+                    high=mid-1
+                else:
+                    low = mid+1
+            if(f):
+                return -1
+            return low
+
+        def floor1(nums,target):
+           low = 0
+           high = len(nums)-1
+           f=True
+           while(low<=high):
+               mid = (low+high)//2
+               if(nums[mid] == target):
+                   f = False
+               if(nums[mid]<=target):
+                   low=mid+1
+               else:
+                   high = mid-1
+           if(f):
+                return -1
+           return high
+        
+        if(len(nums) == 0): 
+            return [-1,-1];
+        n = len(nums)
+        first = ceil1(nums,target)
+        last = floor1(nums,target)
+        return [first,last]
+
+    
