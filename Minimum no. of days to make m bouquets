@@ -1,0 +1,28 @@
+class Solution(object):
+    def minDays(self, bloomDay, m, k):
+        n = len(bloomDay)
+        if(n<m*k):
+            return -1;
+        low,high = min(bloomDay),max(bloomDay)
+        while(low<=high):
+            mid = (low+high)//2
+            t = self.canBouquePossible(bloomDay,m,k,mid);
+            if(t):
+                high = mid-1
+            else:
+                low = mid+1
+        return low;
+
+    def canBouquePossible(self,bloomDay,m,k,mid):
+        c,n=0,0
+        length = len(bloomDay)
+        for i in range(0,length):
+            if(bloomDay[i]<=mid):
+                c+=1
+            else:
+                n += (c//k);
+                c=0
+        n+=(c//k)
+        if(n>=m):
+            return True
+        return False
