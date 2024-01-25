@@ -1,0 +1,18 @@
+class Solution(object):
+    def smallestDivisor(self, nums, threshold):
+        low,high = 1,max(nums)
+        #print(ceil(nums[-1]*0.1/(1*0.1)))
+        while(low<=high):
+            mid = (low+high)//2
+            sum_div = self.findSum(nums,mid)
+            if(sum_div<=threshold):
+                high = mid-1
+            else:
+                low=mid+1
+        return low;
+    def findSum(self,nums,div):
+        sum_d = 0
+        n = len(nums)
+        for i in range(0,n):
+            sum_d += -(-nums[i] // div)
+        return sum_d
