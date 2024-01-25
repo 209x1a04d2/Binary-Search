@@ -1,0 +1,22 @@
+import math
+class Solution(object):
+    def minEatingSpeed(self, piles, h):
+        low = 1
+        high = max(piles)
+        while(low<=high):
+            mid = (low+high)//2
+            hours = self.calculateHours(piles,mid)
+            if(hours<=h):
+                high = mid-1
+            else:
+                low = mid+1
+        return low
+    def calculateHours(self,piles,k):
+        h = 0
+        n = len(piles)
+        for i in range(0,n):
+           h = h + piles[i]//k
+           if(piles[i]%k != 0):
+               h = h+1
+          
+        return h;
