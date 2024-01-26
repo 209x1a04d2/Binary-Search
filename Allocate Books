@@ -1,0 +1,53 @@
+public class Solution {
+    public int books(int[] A, int B) {
+        if(A.length<B){
+            return -1;
+        }
+        int low = max(A);
+        long high = sum(A);
+        while(low<=high){
+            int mid = (int) (low+high) / 2;
+            int stu = func(A,mid);
+            if(stu>B){
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+        return low;
+    }
+    public int max(int[] A){
+        int n = A.length;
+        int max = Integer.MIN_VALUE;
+        for(int i = 0;i<n;i++){
+            if(max<A[i]){
+                max = A[i];
+            }
+        }
+        return max;
+    }
+    public long sum(int[] A){
+        int n = A.length;
+        long sum = 0;
+        for(int i = 0;i<n;i++){
+            sum+=A[i];
+        }
+        return sum;
+    }
+    public int func(int[] A,int m){
+        int stu = 1;
+        long stupages = 0;
+        int n =A.length;
+        for(int i = 0;i<n;i++){
+            if(stupages+A[i] <= m){
+                stupages+=A[i];
+            }
+            else{
+                stu++;
+                stupages = A[i];
+            }
+        }
+        return stu;
+    }
+}
