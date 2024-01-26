@@ -1,0 +1,29 @@
+def findLargestMinDistance(boards:list, k:int):
+    low = max(boards)
+    high = sum(boards)
+    while(low<=high):
+        mid = (low+high)//2
+        no_of_painters = findsPainters(boards,mid)
+        if(no_of_painters<=k):
+            high = mid-1
+        else:
+            low=mid+1
+    return low;
+def findsPainters(boards,time):
+    painters = 0
+    t1=0
+    for i in range(len(boards)):
+        if(boards[i]+t1>time):
+            t1=boards[i]
+            painters+=1
+        elif(boards[i]+t1==time):
+            t1=0
+            painters+=1
+        else:
+            t1+=boards[i]
+    if(t1!=0):
+        p = t1//time
+        if(t1%time!=0):
+            p+=1
+        painters+=p
+    return painters;
