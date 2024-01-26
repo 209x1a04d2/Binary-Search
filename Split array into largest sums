@@ -1,0 +1,32 @@
+class Solution(object):
+    def splitArray(self, nums, k):
+        low,high = max(nums),sum(nums)
+        while(low<=high):
+            mid=(low+high)//2
+            no_sub = self.findSubarrays(nums,mid)
+            if(no_sub<=k):
+                high = mid-1
+            else:
+                low=mid+1
+        return low
+    def findSubarrays(self,nums,mid):
+        sumk=0
+        n = 0
+        for i in range(len(nums)):
+            if(sumk+nums[i]>mid):
+                sumk = nums[i]
+                n+=1
+            elif(sumk+nums[i]==mid):
+                sumk=0
+                n+=1
+            else:
+                sumk+=nums[i]
+        if(sumk!=0):
+            n+=1
+        return n;
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        
