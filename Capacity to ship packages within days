@@ -1,0 +1,31 @@
+class Solution(object):
+    def shipWithinDays(self, weights, days):
+        low,high = max(weights),sum(weights)
+        while(low<=high):
+            mid = (low+high)//2
+            d = self.findDays(weights,mid)
+            if(d<=days):
+                high = mid-1
+            else:
+                low=mid+1
+        return low
+    def findDays(self,weights,mid):
+        d = 0
+        p=0
+        sumw = 0
+        n = len(weights)
+        for i in range(n):
+            if(sumw+weights[i] > mid):
+                sumw = weights[i]
+                d+=1
+            elif(sumw+weights[i] == mid):
+                sumw=0
+                d+=1
+            else:
+                sumw+=weights[i]
+        if(sumw!=0):
+            p = sumw//mid
+            if(sumw%mid!=0):
+                p+=1
+            d+=p
+        return d;
