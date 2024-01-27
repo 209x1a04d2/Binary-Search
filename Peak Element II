@@ -1,0 +1,23 @@
+class Solution(object):
+    def findPeakGrid(self, mat):
+        low,high = 0,len(mat[0])-1
+        while(low<=high):
+            mid = (low+high)//2
+            row = self.findMaxInCol(mat,mid)
+            if((mid == 0 or mat[row][mid]>mat[row][mid-1]) and (mid == len(mat[0])-1 or mat[row][mid]>mat[row][mid+1])):
+                return [row,mid];
+            elif(mid!=0 and mat[row][mid]<mat[row][mid-1]):
+                high = mid-1
+            else:
+                low=mid+1
+        return [-1,-1];
+
+    def findMaxInCol(self,mat,mid):
+        maxi = 0
+        row = 0
+        print(len(mat))
+        for i in range(len(mat)):
+            if(maxi < mat[i][mid]):
+                maxi = mat[i][mid]
+                row = i
+        return row;
